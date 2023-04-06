@@ -39,7 +39,7 @@ public class SecurityConfig {
         	.requestMatchers("/auth/**").permitAll()
         	.anyRequest().authenticated();           
   
-        http.addFilterBefore(jwtAuthenticationProcessingFilter(), LogoutFilter.class);
+        http.addFilterAfter(jwtAuthenticationProcessingFilter(), LogoutFilter.class);
 
         return http.build();
     }
