@@ -15,16 +15,25 @@ import lombok.RequiredArgsConstructor;
 public class UserService {
 
 	private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
-    
+	private final PasswordEncoder passwordEncoder;
+
 	public void addOauth(User user) throws Exception {
-    	userRepository.save(user);
-    }
-    
-    public User findUserwithNickName(String nickname) {
-    	User user = userRepository.findByNickname(nickname)
-    			.orElse(null);
-    	
-    	return user;
-    }
+		userRepository.save(user);
+	}
+
+	public User findUserwithNickName(String nickname) {
+		User user = userRepository.findByNickname(nickname).orElse(null);
+
+		return user;
+	}
+
+	public User findUserwithEmail(String email) {
+
+		User user = userRepository.findByEmail(email).orElseGet(() -> {
+			return null;
+		});
+
+		return user;
+
+	}
 }
